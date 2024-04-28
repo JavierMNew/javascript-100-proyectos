@@ -1,0 +1,179 @@
+<title>100 proyectos JS | 01 - Tinder Swipe</title>
+<main>
+    <section>
+        <header>
+            <img src="tinder-logo.webp" alt="Tinder logo">
+        </header>
+
+        <div class="cards">
+            <article>
+                <img src="./photos/2.webp" alt="Alex, brown hair man, 25 years old"/>
+                <h2>Alex <span>25</span></h2>
+                <div class="choice nope">NOPE</div>
+                <div class="choice like">LIKE</div>
+            </article>
+
+            <article>
+                <img src="./photos/1.webp" alt="Leila, redhead, 27 years old"/>
+                <h2>Leila <span>27</span></h2>
+                <div class="choice nope">NOPE</div>
+                <div class="choice like">LIKE</div>
+            </article>
+        </div>
+
+        <footer>
+            <button class="is-undo" aria-label="undo"></button>
+            <button class="is-remove is-big" aria-label="remove"></button>
+            <button class="is-star" aria-label=""></button>
+            <button class="is-fav is-big" aria-label="fav"></button>
+            <button class="is-zap" aria-label="zap"></button>
+        </footer>
+        
+    </section>
+</main>
+
+<style>
+    *, *::before, *::after{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        display: grid;
+        place-content: center;
+        min-height: 100vh;
+        overflow: hidden;
+        user-select: none;
+        background-color: #e5e5e5;
+    }
+
+    main {
+        background: url('./iphone.webp') no-repeat;
+        background-size: contain;
+        width: 320px;
+        height: 640px;
+        display: flex;
+        filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3)); /*Pone la sombra donde es transparente*/
+    }
+
+    section {
+        background-color: #f6f6f6;
+        width: 100%;
+        border-radius: 32px;
+        display: flex;
+        gap: 24px;
+        flex-direction: column;
+        overflow: hidden;
+        position: relative;
+        padding: 16px 6px;
+        margin: 24px;
+    }
+
+    header {
+        display: flex;
+        justify-content: center;
+        & img{ /*Dentro del header (&), la img has esto {has esto}*/
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    footer {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr); /*En lugar de poner 5 1fr usamos repeat para decirle utiliza 5 veces una fraccion del espacio*/
+        gap: 12px;
+        padding: 0 24px;
+        justify-content: center;
+        align-items: center;
+
+        & button {
+            /*Spries*/
+            background: url('./tinder-icons.webp') no-repeat; /*Cargamos de fondo todas las imagenes y jugamos con el posicion*/
+            background-position: 0px 0px;
+            background-size: 175px;
+            height: 32px;
+            width: 32px;
+            border-radius: 50%;
+            border: 0;
+            cursor: pointer;
+            transition: scale .3s ease; /*Transicion cuando se haga cover a la scale le das .3s de ease*/
+
+            &:hover {
+                scale: 1.3;
+            } /*Escala al hacer hover 1.3*/
+            
+            &.is-big {
+                background-size: 250px;
+                width: 48px;
+                height: 48px;
+            }
+
+            &.is-undo {
+                background-position: -140px 0; /*Movemos la imagen hasta encontrar la correcta del spray*/
+            }
+
+            &.is-remove {
+                background-position: -150px 0;
+            }
+
+            &.is-fav {
+                background-position: -50px 0;
+            }
+
+            &.is-star {
+                background-position: -70px 0;
+            }
+        }
+    }
+
+    .cards {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+
+        & article {
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+            cursor: grab;
+            overflow: hidden;
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            /*will-change: transform rotate;  Mejora el rendimiento de las animaciones, lo que hace es decirle al browser cuales son las propiedades que vas a animar*/
+
+            & img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            & h2 {
+                color: white;
+                position: absolute;
+                inset: 0;
+                display: flex;
+                align-items: flex-end;
+                height: 100%;
+                width: 100%;
+                padding: 16px;
+                z-index: 3;
+                background: linear-gradient(
+                    to top, #00000088 20%, 
+                    transparent 40%
+                    ); /*Es un gradiente lineal y le decimos la direccion, to top quiere decir que inicias de este punto hacia arriba: del punto 0 hasta el 20% tendremos el color de granditante que pongamos y luego del 20% al 40% se volvera transparente*/
+            }
+
+            & span {
+                margin-left: 6px;
+                font-size: 18px;
+                line-height: 1.4;
+                font-weight: 400;
+            }
+        }
+    }
+</style>
